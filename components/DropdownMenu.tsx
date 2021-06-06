@@ -25,14 +25,14 @@ const DropdownDiv = styled.div`
 
 const DropdownList = styled.ul<{
   isMenuActive: boolean;
-  mountUnmount: boolean;
+  render: boolean;
 }>`
   list-style: none;
   margin: 0;
   padding: 0;
   position: relative;
   top: 0;
-  display: ${({ mountUnmount }) => (mountUnmount ? "none" : "block")};
+  // display: ${({ render }) => (render ? "none" : "block")};
   animation: ${({ isMenuActive }) =>
     !isMenuActive
       ? css`
@@ -68,16 +68,16 @@ const Div = styled.div`
 
 function DropdownMenu({ children }) {
   const [isMenuActive, setIsMenuActive] = useState(false);
-  const [mountUnmount, setMountUnmount] = useState(isMenuActive);
+  const [render, setRender] = useState(isMenuActive);
 
   useEffect(() => {
-    if (isMenuActive) setMountUnmount(true);
+    if (isMenuActive) setRender(true);
   }, [isMenuActive]);
 
   const activateMenu = (toActivateMenu) => {
     if (toActivateMenu) {
       return setIsMenuActive(() => {
-        // setMountUnmount(true);
+        // setRender(true);
         return true;
       });
     }
@@ -88,7 +88,7 @@ function DropdownMenu({ children }) {
   };
 
   const onAnimationEnd = () => {
-    if (!isMenuActive) return setMountUnmount(false);
+    if (!isMenuActive) return setRender(false);
   };
 
   return (
@@ -96,13 +96,13 @@ function DropdownMenu({ children }) {
       <Div>
         <DropdownList
           isMenuActive={isMenuActive}
-          mountUnmount={mountUnmount}
+          render={render}
           onAnimationEnd={onAnimationEnd}>
           {Children.map(children, (child) =>
             cloneElement(child, {
               activateMenu,
               deactivateMenu,
-              mountUnmount,
+              render,
             })
           )}
         </DropdownList>

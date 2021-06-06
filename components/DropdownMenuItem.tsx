@@ -25,19 +25,25 @@ function DropdownMenuItem({
   label,
   activateMenu,
   deactivateMenu,
-  mountUnmount,
+  render,
 }) {
-  return mountUnmount && Boolean(children) ? (
-    <DropdownItemChildPortal deactivateMenu={deactivateMenu}>
-      {children}
-    </DropdownItemChildPortal>
-  ) : (
-    <MenuItem onClick={() => activateMenu(Boolean(children))}>
-      {leftIcon && <span>{leftIcon}</span>}
-      {label}
-      {rightIcon && <span>{rightIcon}</span>}
-    </MenuItem>
-  );
+  if (render) {
+    if (children) {
+      return (
+        <DropdownItemChildPortal deactivateMenu={deactivateMenu}>
+          {children}
+        </DropdownItemChildPortal>
+      );
+    } else return null;
+  } else {
+    return (
+      <MenuItem onClick={() => activateMenu(Boolean(children))}>
+        {leftIcon && <span>{leftIcon}</span>}
+        {label}
+        {rightIcon && <span>{rightIcon}</span>}
+      </MenuItem>
+    );
+  }
 }
 
 export default DropdownMenuItem;
