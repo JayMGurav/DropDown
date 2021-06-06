@@ -1,8 +1,8 @@
-import { ChildProcessWithoutNullStreams } from "child_process"
-import styled from "styled-components"
-
+import styled from "styled-components";
+import DropdownItemChildPortal from "./DropdownItemChildrenPortal";
 
 const MenuItem = styled.li`
+  cursor: pointer;
   margin: 0.25rem 0;
   padding: 0.5rem;
   min-width: 150px;
@@ -10,50 +10,35 @@ const MenuItem = styled.li`
   align-items: center;
   gap: 1ch;
   border-radius: 8px;
-  span:last-of-type{
+  span:last-of-type {
     margin-left: auto;
   }
   :hover {
     background-color: var(--foreground);
   }
-`
+`;
 
-function DropdownMenuItem({leftIcon, children, rightIcon, to, activateMenu}){  
-  // const activateMenu = (component) => {
-  //   return setIsMenuActive(() => {
-  //     setActiveMenu(component);
-  //     return true;
-  //   })
-  // }
-
-  return (
-    <MenuItem onClick={() => activateMenu(DummyComp)}>
-      {leftIcon && <span>{leftIcon}</span>}
-      {children}
-      {rightIcon && <span>{rightIcon}</span>}
-    </MenuItem>
-  )
-}
-
-
-
-function DummyComp(props) {
-  console.log(props)
-  // const deActivateMenu = (e) => {
-  //   return setIsMenuActive(() => {
-  //     setActiveMenu(null)
-  //     return false;
-  //   })
-  // }
+function DropdownMenuItem({
+  leftIcon,
+  children,
+  rightIcon,
+  label,
+  activateMenu,
+  deactivateMenu,
+  isMenuActive,
+}) {
 
   return (
-    <div>
-    <div>
-      <button>Back</button>
-      Hello world
-    </div>
-    </div>
-  )
+    isMenuActive && Boolean(children) ? 
+    <DropdownItemChildPortal deactivateMenu={deactivateMenu}>{children}</DropdownItemChildPortal> :
+    (
+      <MenuItem onClick={() => activateMenu(Boolean(children))}>
+        {leftIcon && <span>{leftIcon}</span>}
+        {label}
+        {rightIcon && <span>{rightIcon}</span>}
+      </MenuItem>
+    )
+  );
 }
 
 export default DropdownMenuItem;

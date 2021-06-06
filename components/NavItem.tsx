@@ -12,11 +12,11 @@ const Li = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  position:relative;
-  ${NavItemBox} { 
+  position: relative;
+  ${NavItemBox} {
+    cursor: pointer;
     padding: 0.5rem;
-    width:100%;
+    width: 100%;
     background-color: var(--foreground);
     border-radius: 10px;
     transition: filter 100ms;
@@ -26,7 +26,7 @@ const Li = styled.li`
       filter: brightness(1) grayscale(0);
     }
   }
-`
+`;
 
 function NavItem({icon, children}){
   const [isOpen, setIsOpen] = useState(false);

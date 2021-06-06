@@ -1,105 +1,96 @@
-import React, { Children, cloneElement, createElement, useState } from 'react';
-import styled, { StyledFunction } from "styled-components"
+import React, { Children, cloneElement, useState } from "react";
+import styled, { css } from "styled-components";
 
-// components
-// import DropdownMenuItem from './DropdownMenuItem'
+// animation
+import {
+  menuEnterAnimation,
+  menuLeaveAnimation,
+  activeMenuEnterAnimation,
+  activeMenuLeaveAnimation,
+} from "@/styles/menuAnimation";
 
-
-
-// const rotate = keyframes`
-//   0% {
-//     opacity: 0;
-//     left: -100px;
-//   }
-//   100% {
-//     opacity: 1;
-//     left: 0px;
-//   }
-// `;
-
+// styled-components
 const DropdownDiv = styled.div`
   position: absolute;
-  left:0;
+  left: 0;
   top: 100%;
-  padding:0.75rem ;
+  padding: 0.75rem;
   margin-top: 1rem;
-  list-style: none;
-  background-color:  var(--background);
+  background-color: var(--background);
   border-radius: 16px;
   height: fit-content;
   overflow-x: hidden;
-  transition: height 250ms;
-`
-
-const DropdownList = styled.ul<{isMenuActive:boolean}>`
-  list-style: none;
-  margin: 0;
-  padding: 0; 
-  position: relative; 
-  width:100%;
-  top: 0;
-  left:${({isMenuActive}) => {
-   return isMenuActive ? "-120%" : "0%"
-  }};
-  /* display: ${({isMenuActive}) => isMenuActive ? "none" : "contents"}; */
-  /* visibility: ${({isMenuActive}) => isMenuActive ? "hidden" : "visible"}; */
-  /* opacity : ${({isMenuActive}) => isMenuActive ? "0" : "1"}; */
-  transition:  left 300ms linear;
+  transition: height 500ms;
 `;
 
-const ActiveMenuDiv = styled.div<{isMenuActive:boolean}>`
+const DropdownList = styled.ul<{ isMenuActive: boolean }>`
   list-style: none;
   margin: 0;
-  padding: 0; 
-  position: relative; 
-  width:100%;
-  background:red;
-  height: fit-content;
+  padding: 0;
+  position: relative;
   top: 0;
-  left:${({isMenuActive}) => {
-   return isMenuActive ? "0%" : "120%";
-  }};
-  /* display: ${({isMenuActive}) => !isMenuActive ? "none" : "block"}; */
-  /* visibility: ${({isMenuActive}) => isMenuActive ? "visible" : "hidden"}; */
-  /* opacity : ${({isMenuActive}) => isMenuActive ? "1" : "0"}; */
-  transition: left 300ms linear;
+  display: ${({ isMenuActive }) => (isMenuActive ? "none" : "block")};
+  animation: ${({ isMenuActive }) =>
+    !isMenuActive
+      ? css`
+          ${menuEnterAnimation} 200ms ease-in-out
+        `
+      : css`
+          ${menuLeaveAnimation} 200ms ease-in-out
+        `};
+  transition: display 200ms ease-in-out;
+`;
+
+const ActiveMenuDiv = styled.div<{ isMenuActive: boolean }>`
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 0;
+  display: ${({ isMenuActive }) => (isMenuActive ? "block" : "none")};
+  animation: ${({ isMenuActive }) =>
+    isMenuActive
+      ? css`
+          ${activeMenuEnterAnimation} 250ms ease-in-out
+        `
+      : css`
+          ${activeMenuLeaveAnimation} 250ms ease-in-out
+        `};
+  transition: display 200ms ease-in-out;
 `;
 
 const Div = styled.div`
   position: relative;
 `;
 
-
-function DropdownMenu({children}){
-
+function DropdownMenu({ children }) {
   const [isMenuActive, setIsMenuActive] = useState(false);
-  const [activeMenu, setActiveMenu] = useState(null);
-  
-  // console.log({isMenuActive, activeMenu})
 
+  const activateMenu = (toActivateMenu) => {
+    if (toActivateMenu) {
+      return setIsMenuActive(true);
+    }
+  };
 
-  const activateMenu = (component) => {
-    return setIsMenuActive(() => {
-      setActiveMenu(component);
-      return true;
-    })
-  }
+  const deactivateMenu = () => {
+    return setIsMenuActive(false);
+  };
 
   return (
     <DropdownDiv>
       <Div>
-        {!isMenuActive && <DropdownList isMenuActive={isMenuActive}>
-        {Children.map(children, (child) => (
-          cloneElement(child, {activateMenu})
-        ))}
-        </DropdownList>}
-        {isMenuActive && <ActiveMenuDiv isMenuActive={isMenuActive}>
-          {cloneElement(activeMenu, {activateMenu})}
-        </ActiveMenuDiv>}
+        <DropdownList isMenuActive={isMenuActive}>
+          {Children.map(children, (child) =>
+            cloneElement(child, {
+              activateMenu,
+              deactivateMenu,
+              isMenuActive,
+            })
+          )}
+        </DropdownList>
+        <ActiveMenuDiv isMenuActive={isMenuActive} id="dropdownPortal" />
       </Div>
-   </DropdownDiv>
-  )
+    </DropdownDiv>
+  );
 }
-
 
 export default DropdownMenu;
