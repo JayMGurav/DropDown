@@ -1,4 +1,4 @@
-import React, { Children, cloneElement, useState } from "react";
+import React, { Children, cloneElement, useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 
 // animation
@@ -23,13 +23,16 @@ const DropdownDiv = styled.div`
   transition: height 500ms;
 `;
 
-const DropdownList = styled.ul<{ isMenuActive: boolean }>`
+const DropdownList = styled.ul<{
+  isMenuActive: boolean;
+  mountUnmount: boolean;
+}>`
   list-style: none;
   margin: 0;
   padding: 0;
   position: relative;
   top: 0;
-  display: ${({ isMenuActive }) => (isMenuActive ? "none" : "block")};
+  display: ${({ mountUnmount }) => (mountUnmount ? "none" : "block")};
   animation: ${({ isMenuActive }) =>
     !isMenuActive
       ? css`
@@ -41,19 +44,20 @@ const DropdownList = styled.ul<{ isMenuActive: boolean }>`
   transition: display 200ms ease-in-out;
 `;
 
-const ActiveMenuDiv = styled.div<{ isMenuActive: boolean }>`
+const ActiveMenuDiv = styled.div<{
+  isMenuActive: boolean;
+}>`
   margin: 0;
   padding: 0;
   position: relative;
   top: 0;
-  display: ${({ isMenuActive }) => (isMenuActive ? "block" : "none")};
   animation: ${({ isMenuActive }) =>
     isMenuActive
       ? css`
-          ${activeMenuEnterAnimation} 250ms ease-in-out
+          ${activeMenuEnterAnimation} 200ms ease-in-out
         `
       : css`
-          ${activeMenuLeaveAnimation} 250ms ease-in-out
+          ${activeMenuLeaveAnimation} 200ms ease-in-out
         `};
   transition: display 200ms ease-in-out;
 `;
@@ -64,10 +68,18 @@ const Div = styled.div`
 
 function DropdownMenu({ children }) {
   const [isMenuActive, setIsMenuActive] = useState(false);
+  const [mountUnmount, setMountUnmount] = useState(isMenuActive);
+
+  useEffect(() => {
+    if (isMenuActive) setMountUnmount(true);
+  }, [isMenuActive]);
 
   const activateMenu = (toActivateMenu) => {
     if (toActivateMenu) {
-      return setIsMenuActive(true);
+      return setIsMenuActive(() => {
+        // setMountUnmount(true);
+        return true;
+      });
     }
   };
 
@@ -75,19 +87,30 @@ function DropdownMenu({ children }) {
     return setIsMenuActive(false);
   };
 
+  const onAnimationEnd = () => {
+    if (!isMenuActive) return setMountUnmount(false);
+  };
+
   return (
     <DropdownDiv>
       <Div>
-        <DropdownList isMenuActive={isMenuActive}>
+        <DropdownList
+          isMenuActive={isMenuActive}
+          mountUnmount={mountUnmount}
+          onAnimationEnd={onAnimationEnd}>
           {Children.map(children, (child) =>
             cloneElement(child, {
               activateMenu,
               deactivateMenu,
-              isMenuActive,
+              mountUnmount,
             })
           )}
         </DropdownList>
-        <ActiveMenuDiv isMenuActive={isMenuActive} id="dropdownPortal" />
+        <ActiveMenuDiv
+          isMenuActive={isMenuActive}
+          id="dropdownPortal"
+          onAnimationEnd={onAnimationEnd}
+        />
       </Div>
     </DropdownDiv>
   );

@@ -1,6 +1,8 @@
 {
   "cSpell.ignoreWords": [
+    "mount",
     "mountpoint",
-    "set"
+    "set",
+    "unmount"
   ]
 }
