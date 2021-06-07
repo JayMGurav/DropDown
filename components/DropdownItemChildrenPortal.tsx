@@ -1,31 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // components
-
-import {
-  activeMenuEnterAnimation,
-  activeMenuLeaveAnimation,
-} from "@/styles/menuAnimation";
-
 const DropdownItemPortalDiv = styled.div`
   padding: 0.5rem 0;
 `;
 const ContentDiv = styled.div`
   padding: 0.25rem;
+  width: 100%;
+  border-top: 1px solid var(--foreground);
 `;
 
-const BackButton = styled.div`
-  width: 28px;
-  height: 28px;
-  margin-bottom: 0.75rem;
-  background: var(--foreground);
-  border-radius: 50%;
-  cursor: pointer;
+const BackButton = styled.button`
+  height: 24px;
+  width: 24px;
+  margin: 0.25rem 0.5rem;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  margin-bottom: 1rem;
+  background: var(--foreground);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  img {
+    padding: 0.25rem;
+    transform: rotate(180deg);
+  }
 `;
 
 const PORTAL_MOUNTPOINT_ID = "dropdownPortal";
@@ -44,7 +48,9 @@ function DropdownItemChildPortal({ children, deactivateMenu }) {
   return mountElement
     ? createPortal(
         <DropdownItemPortalDiv>
-          <BackButton onClick={() => deactivateMenu()}>‹</BackButton>
+          <BackButton onClick={() => deactivateMenu()}>
+            <img src="arrow.svg" />
+          </BackButton>
           <ContentDiv>{children}</ContentDiv>
         </DropdownItemPortalDiv>,
 

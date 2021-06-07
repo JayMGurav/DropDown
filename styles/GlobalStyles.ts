@@ -5,6 +5,7 @@ const GloBalStyles = createGlobalStyle`
     --background: #242526;
     --foreground: #484a4d;
     --speed: 250ms;
+    --text: #eee;
   }
 
   body {
@@ -20,6 +21,5 @@ const GloBalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 `;
-
 
 export default GloBalStyles;

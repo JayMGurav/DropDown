@@ -1,5 +1,5 @@
 import React, { Children, cloneElement, useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 // animation
 import {
@@ -9,18 +9,17 @@ import {
   activeMenuLeaveAnimation,
 } from "@/styles/menuAnimation";
 
-// styled-components
 const DropdownDiv = styled.div`
   position: absolute;
   left: 0;
   top: 100%;
-  padding: 0.75rem;
+  padding: 0.25rem;
+  width: max-content;
   margin-top: 1rem;
   background-color: var(--background);
   border-radius: 16px;
-  height: fit-content;
-  overflow-x: hidden;
-  transition: height 500ms;
+  overflow: hidden;
+  transition: all 300ms;
 `;
 
 const DropdownList = styled.ul<{
@@ -29,23 +28,22 @@ const DropdownList = styled.ul<{
 }>`
   list-style: none;
   margin: 0;
-  padding: 0;
   position: relative;
   top: 0;
-  // display: ${({ render }) => (render ? "none" : "block")};
-  animation: ${({ isMenuActive }) =>
-    !isMenuActive
+  padding: 0.25rem;
+  animation: ${({ render }) =>
+    !render
       ? css`
-          ${menuEnterAnimation} 200ms ease-in-out
+          ${menuEnterAnimation} 250ms ease-in-out
         `
       : css`
-          ${menuLeaveAnimation} 200ms ease-in-out
+          ${menuLeaveAnimation} 250ms ease-in-out
         `};
-  transition: display 200ms ease-in-out;
 `;
 
 const ActiveMenuDiv = styled.div<{
   isMenuActive: boolean;
+  render: boolean;
 }>`
   margin: 0;
   padding: 0;
@@ -54,17 +52,16 @@ const ActiveMenuDiv = styled.div<{
   animation: ${({ isMenuActive }) =>
     isMenuActive
       ? css`
-          ${activeMenuEnterAnimation} 200ms ease-in-out
+          ${activeMenuEnterAnimation} 250ms ease-in-out
         `
       : css`
-          ${activeMenuLeaveAnimation} 200ms ease-in-out
+          ${activeMenuLeaveAnimation} 250ms ease-in-out
         `};
-  transition: display 200ms ease-in-out;
 `;
 
-const Div = styled.div`
-  position: relative;
-`;
+// const Div = styled.div`
+//   position: relative;
+// `;
 
 function DropdownMenu({ children }) {
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -76,44 +73,48 @@ function DropdownMenu({ children }) {
 
   const activateMenu = (toActivateMenu) => {
     if (toActivateMenu) {
-      return setIsMenuActive(() => {
-        // setRender(true);
+      setIsMenuActive(() => {
         return true;
       });
     }
   };
 
   const deactivateMenu = () => {
-    return setIsMenuActive(false);
+    setIsMenuActive(false);
   };
 
   const onAnimationEnd = () => {
+    // if (isMenuActive) return setRender(true);
     if (!isMenuActive) return setRender(false);
   };
 
   return (
     <DropdownDiv>
-      <Div>
-        <DropdownList
-          isMenuActive={isMenuActive}
-          render={render}
-          onAnimationEnd={onAnimationEnd}>
-          {Children.map(children, (child) =>
-            cloneElement(child, {
-              activateMenu,
-              deactivateMenu,
-              render,
-            })
-          )}
-        </DropdownList>
-        <ActiveMenuDiv
-          isMenuActive={isMenuActive}
-          id="dropdownPortal"
-          onAnimationEnd={onAnimationEnd}
-        />
-      </Div>
+      <DropdownList
+        isMenuActive={isMenuActive}
+        render={render}
+        onAnimationEnd={onAnimationEnd}>
+        {/* <div style={{ padding: 10 }}> */}
+        {Children.map(children, (child) =>
+          cloneElement(child, {
+            activateMenu,
+            deactivateMenu,
+            render,
+          })
+        )}
+        {/* </div> */}
+      </DropdownList>
+      <ActiveMenuDiv
+        render={render}
+        isMenuActive={isMenuActive}
+        id="dropdownPortal"
+        onAnimationEnd={onAnimationEnd}
+      />
     </DropdownDiv>
   );
 }
+// {/* <Div> */}
+
+// {/* </Div> */}
 
 export default DropdownMenu;
