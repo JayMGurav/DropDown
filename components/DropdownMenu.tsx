@@ -94,7 +94,6 @@ function DropdownMenu({ children }) {
         isMenuActive={isMenuActive}
         render={render}
         onAnimationEnd={onAnimationEnd}>
-        {/* <div style={{ padding: 10 }}> */}
         {Children.map(children, (child) =>
           cloneElement(child, {
             activateMenu,
@@ -102,7 +101,6 @@ function DropdownMenu({ children }) {
             render,
           })
         )}
-        {/* </div> */}
       </DropdownList>
       <ActiveMenuDiv
         render={render}
@@ -113,8 +111,4 @@ function DropdownMenu({ children }) {
     </DropdownDiv>
   );
 }
-// {/* <Div> */}
-
-// {/* </Div> */}
-
 export default DropdownMenu;

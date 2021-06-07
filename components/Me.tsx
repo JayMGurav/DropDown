@@ -3,7 +3,7 @@ import styled from "styled-components";
 import NavItem from "./NavItem";
 import DropdownMenu from "./DropdownMenu";
 import DropdownMenuItem from "./DropdownMenuItem";
-import Icon from "./styledComponents/Icon";
+import { IconSm } from "./styledComponents/Icon";
 import ProfileTab from "./ProfileTab";
 
 const AboutMeDetails = styled.div`
@@ -27,17 +27,17 @@ function Me() {
           <ProfileTab />
         </AboutMeDetails>
         <DropdownMenuItem
-          leftIcon={<Icon src="twitter.svg" />}
+          leftIcon={<IconSm src="twitter.svg" />}
           label="Twitter"
           to="https://twitter.com/jaymgurav"
         />
         <DropdownMenuItem
-          leftIcon={<Icon src="github.svg" />}
+          leftIcon={<IconSm src="github.svg" />}
           label="Github"
           to="https://github.com/jaymgurav"
         />
         <DropdownMenuItem
-          leftIcon={<Icon src="linkedin.svg" />}
+          leftIcon={<IconSm src="linkedin.svg" />}
           label="LinkedIn"
           to="https://linkedin.com/in/jaymgurav"
         />

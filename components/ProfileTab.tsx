@@ -35,7 +35,7 @@ function ProfileTab() {
       <h2>Jay Gurav</h2>
       <p>Software Engineer. Learning, building, blogging</p>
       <span role="image" aria-label="Jay Gurav's interests">
-        👨‍💻 • 📖 • ✍
+        👨‍💻 • 📖• 🚀 • ✍
       </span>
     </ProfileTabDiv>
   );

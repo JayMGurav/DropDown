@@ -3,7 +3,7 @@ import styled from "styled-components";
 import NavItem from "./NavItem";
 import DropdownMenu from "./DropdownMenu";
 import DropdownMenuItem from "./DropdownMenuItem";
-import Icon from "./styledComponents/Icon";
+import { IconSm } from "./styledComponents/Icon";
 import BriefDiv from "./styledComponents/BriefDiv";
 import ExternalAnchor from "./styledComponents/ExternalAnchor";
 
@@ -22,11 +22,11 @@ const AboutMeDetails = styled.div`
 
 function RecentPosts() {
   return (
-    <NavItem label="✍ Recent Posts">
+    <NavItem label="📃 Recent Posts">
       <DropdownMenu>
         <DropdownMenuItem
-          leftIcon={<Icon src="graphql.svg" />}
-          rightIcon={<Icon src="arrow.svg" />}
+          leftIcon={<IconSm src="graphql.svg" />}
+          rightIcon={<IconSm src="arrow.svg" />}
           label="Why GraphQL?">
           <BriefDiv>
             <p>
@@ -45,14 +45,14 @@ function RecentPosts() {
           </BriefDiv>
         </DropdownMenuItem>
         <DropdownMenuItem
-          leftIcon={<Icon src="js.svg" />}
-          rightIcon={<Icon src="externalLink.svg" />}
+          leftIcon={<IconSm src="js.svg" />}
+          rightIcon={<IconSm src="externalLink.svg" />}
           label="Re-Realizing context"
           to="https://jaygurav.netlify.app/chaitime/reRealizingContext/"
         />
         <DropdownMenuItem
-          leftIcon={<Icon src="graphql.svg" />}
-          rightIcon={<Icon src="externalLink.svg" />}
+          leftIcon={<IconSm src="graphql.svg" />}
+          rightIcon={<IconSm src="externalLink.svg" />}
           label="GraphQL Types system"
           to="https://jaygurav.netlify.app/chaitime/reRealizingContext/"
         />
