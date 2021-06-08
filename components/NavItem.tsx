@@ -1,7 +1,8 @@
 import { ReactNode, useState } from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-const NavItemBox = styled.div<{
+const NavItemBox = styled(motion.div)<{
   isOpen: boolean;
 }>`
   cursor: pointer;
@@ -18,7 +19,7 @@ const NavItemBox = styled.div<{
   }
 `;
 
-const Li = styled.li`
+const Li = styled.li<{ isOpen: () => boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,7 +45,11 @@ function NavItem({
     });
   return (
     <Li isOpen={isOpen}>
-      <NavItemBox onClick={toOpen} isOpen={isOpen}>
+      <NavItemBox
+        onClick={toOpen}
+        isOpen={isOpen}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.98 }}>
         {label}
       </NavItemBox>
       {isOpen && children}

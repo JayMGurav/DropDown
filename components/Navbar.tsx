@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-const Nav = styled.nav`
+const Nav = styled(motion.nav)`
   background-color: var(--background);
-  padding: 0.75rem 1rem;
+  padding: 1rem;
   border-radius: 16px;
 `;
 

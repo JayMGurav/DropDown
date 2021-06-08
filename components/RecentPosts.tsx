@@ -7,19 +7,6 @@ import { IconSm } from "./styledComponents/Icon";
 import BriefDiv from "./styledComponents/BriefDiv";
 import ExternalAnchor from "./styledComponents/ExternalAnchor";
 
-const AboutMeDetails = styled.div`
-  min-width: 200px;
-  padding: 0.25rem;
-  text-align: center;
-  text {
-    display: block;
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-`;
-
 function RecentPosts() {
   return (
     <NavItem label="📃 Recent Posts">

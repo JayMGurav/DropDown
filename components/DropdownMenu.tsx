@@ -1,113 +1,110 @@
-import React, { Children, cloneElement, useState, useEffect } from "react";
-import styled, { css, keyframes } from "styled-components";
+import React, { Children, cloneElement, useState, ReactNode } from "react";
+import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
 
-// animation
-import {
-  menuEnterAnimation,
-  menuLeaveAnimation,
-  activeMenuEnterAnimation,
-  activeMenuLeaveAnimation,
-} from "@/styles/menuAnimation";
+import { IconSm } from "./styledComponents/Icon";
 
-const DropdownDiv = styled.div`
+const DropdownDiv = styled(motion.div)`
   position: absolute;
   left: 0;
   top: 100%;
   padding: 0.25rem;
   width: max-content;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   background-color: var(--background);
   border-radius: 16px;
   overflow: hidden;
-  transition: all 300ms;
 `;
 
-const DropdownList = styled.ul<{
-  isMenuActive: boolean;
-  render: boolean;
-}>`
+const DropdownList = styled(motion.ul)`
   list-style: none;
   margin: 0;
-  position: relative;
-  top: 0;
-  padding: 0.25rem;
-  animation: ${({ render }) =>
-    !render
-      ? css`
-          ${menuEnterAnimation} 250ms ease-in-out
-        `
-      : css`
-          ${menuLeaveAnimation} 250ms ease-in-out
-        `};
+  padding: 0.5rem;
 `;
 
-const ActiveMenuDiv = styled.div<{
-  isMenuActive: boolean;
-  render: boolean;
-}>`
+const ActiveMenuDiv = styled(motion.div)`
   margin: 0;
-  padding: 0;
-  position: relative;
-  top: 0;
-  animation: ${({ isMenuActive }) =>
-    isMenuActive
-      ? css`
-          ${activeMenuEnterAnimation} 250ms ease-in-out
-        `
-      : css`
-          ${activeMenuLeaveAnimation} 250ms ease-in-out
-        `};
+  padding: 1rem;
 `;
 
-// const Div = styled.div`
-//   position: relative;
-// `;
+const BackButton = styled.button`
+  border: none;
+  padding: 0;
+  background: inherit;
+  ${IconSm} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--foreground);
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+    transform: rotate(180deg);
+  }
+`;
 
 function DropdownMenu({ children }) {
   const [isMenuActive, setIsMenuActive] = useState(false);
-  const [render, setRender] = useState(isMenuActive);
+  const [activeMenu, setActiveMenu] = useState(null);
 
-  useEffect(() => {
-    if (isMenuActive) setRender(true);
-  }, [isMenuActive]);
-
-  const activateMenu = (toActivateMenu) => {
-    if (toActivateMenu) {
+  const activateMenu = (child: ReactNode) => {
+    if (Boolean(child)) {
       setIsMenuActive(() => {
+        setActiveMenu(child);
         return true;
       });
     }
   };
 
   const deactivateMenu = () => {
-    setIsMenuActive(false);
+    setIsMenuActive(() => {
+      setActiveMenu(null);
+      return false;
+    });
   };
 
-  const onAnimationEnd = () => {
-    // if (isMenuActive) return setRender(true);
-    if (!isMenuActive) return setRender(false);
+  const animate = {
+    opacity: 1,
+    x: 0,
   };
 
   return (
-    <DropdownDiv>
-      <DropdownList
-        isMenuActive={isMenuActive}
-        render={render}
-        onAnimationEnd={onAnimationEnd}>
-        {Children.map(children, (child) =>
-          cloneElement(child, {
-            activateMenu,
-            deactivateMenu,
-            render,
-          })
+    <DropdownDiv
+      layout
+      transition={{
+        duration: 0.1,
+      }}>
+      <AnimatePresence exitBeforeEnter>
+        {!isMenuActive && (
+          <DropdownList
+            initial={{
+              opacity: 0,
+              x: -100,
+            }}
+            animate={animate}
+            key="dropdownList">
+            {Children.map(children, (child) =>
+              cloneElement(child, {
+                activateMenu,
+                deactivateMenu,
+              })
+            )}
+          </DropdownList>
         )}
-      </DropdownList>
-      <ActiveMenuDiv
-        render={render}
-        isMenuActive={isMenuActive}
-        id="dropdownPortal"
-        onAnimationEnd={onAnimationEnd}
-      />
+        {isMenuActive && (
+          <ActiveMenuDiv
+            key="activeMenu"
+            initial={{
+              opacity: 0,
+              x: 100,
+            }}
+            animate={animate}>
+            <BackButton onClick={deactivateMenu}>
+              <IconSm src="/arrow.svg" />
+            </BackButton>
+            {activeMenu}
+          </ActiveMenuDiv>
+        )}
+      </AnimatePresence>
     </DropdownDiv>
   );
 }

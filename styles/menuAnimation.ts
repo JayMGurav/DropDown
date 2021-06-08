@@ -3,27 +3,27 @@ import { keyframes } from "styled-components";
 // dropdownList
 export const menuEnterAnimation = keyframes`
   0% {
-    opacity: 0;
+    /* opacity: 0; */
     /* display: none; */
-    left: -120%;
+    /* left: -120%; */
   }
   100% {
-    opacity: 1;
+    /* opacity: 1; */
     /* display: block; */
-    left: 0px;
+    /* left: 0px; */
   }
 `;
 
 export const menuLeaveAnimation = keyframes`
   0% {
-    opacity: 1;
+    /* opacity: 1; */
     /* display: block; */
-    left: 0%;
+    /* left: 0%; */
   }
   100% {
-    opacity: 0;
+    /* opacity: 0; */
     /* display: none; */
-    left: -120%;
+    /* left: -120%; */
   }
 `;
 

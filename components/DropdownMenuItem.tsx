@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import styled from "styled-components";
 import DropdownItemChildPortal from "./DropdownItemChildrenPortal";
 
@@ -22,11 +22,6 @@ const MenuItem = styled.li`
   }
 `;
 
-const AnchorMenuItem = styled.a`
-  text-decoration: none;
-  color: inherit;
-`;
-
 interface DropdownMenuItemProps {
   leftIcon?: ReactNode;
   children?: ReactNode;
@@ -45,43 +40,25 @@ function DropdownMenuItem({
   label,
   to,
   activateMenu,
-  deactivateMenu,
-  render,
 }: DropdownMenuItemProps) {
-  if (render) {
-    if (children) {
-      return (
-        <DropdownItemChildPortal deactivateMenu={deactivateMenu}>
-          {children}
-        </DropdownItemChildPortal>
-      );
-    } else return null;
+  if (children && !to) {
+    return (
+      <MenuItem onClick={() => activateMenu(children)}>
+        {leftIcon && <span>{leftIcon}</span>}
+        {label}
+        {rightIcon && <span style={{ marginLeft: "auto" }}>{rightIcon}</span>}
+      </MenuItem>
+    );
   } else {
-    if (children && !to) {
-      return (
-        <MenuItem onClick={() => activateMenu(Boolean(children))}>
+    return (
+      <ExternalAnchor href={!Boolean(children) && to ? to : ""} colored={false}>
+        <MenuItem>
           {leftIcon && <span>{leftIcon}</span>}
           {label}
           {rightIcon && <span style={{ marginLeft: "auto" }}>{rightIcon}</span>}
         </MenuItem>
-      );
-    } else {
-      return (
-        <ExternalAnchor
-          href={!Boolean(children) && to ? to : ""}
-          // target="_blank"
-          // rel="noopener noreferrer"
-          colored={false}>
-          <MenuItem>
-            {leftIcon && <span>{leftIcon}</span>}
-            {label}
-            {rightIcon && (
-              <span style={{ marginLeft: "auto" }}>{rightIcon}</span>
-            )}
-          </MenuItem>
-        </ExternalAnchor>
-      );
-    }
+      </ExternalAnchor>
+    );
   }
 }
 
