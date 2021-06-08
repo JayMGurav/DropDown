@@ -1,8 +1,8 @@
-import { ReactNode, useState } from "react";
-import styled from "styled-components";
-import DropdownItemChildPortal from "./DropdownItemChildrenPortal";
+import { ReactNode, useState } from 'react';
+import styled from 'styled-components';
+import DropdownItemChildPortal from './DropdownItemChildrenPortal';
 
-import ExternalAnchor from "./styledComponents/ExternalAnchor";
+import ExternalAnchor from './styledComponents/ExternalAnchor';
 
 const MenuItem = styled.li`
   cursor: pointer;
@@ -14,11 +14,11 @@ const MenuItem = styled.li`
   border-radius: 8px;
   span:first-of-type {
     border-radius: 50%;
-    background: var(--background);
+    background: var(--color-background);
     filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
   }
   :hover {
-    background-color: var(--foreground);
+    background-color: var(--color-foreground);
   }
 `;
 
@@ -46,16 +46,16 @@ function DropdownMenuItem({
       <MenuItem onClick={() => activateMenu(children)}>
         {leftIcon && <span>{leftIcon}</span>}
         {label}
-        {rightIcon && <span style={{ marginLeft: "auto" }}>{rightIcon}</span>}
+        {rightIcon && <span style={{ marginLeft: 'auto' }}>{rightIcon}</span>}
       </MenuItem>
     );
   } else {
     return (
-      <ExternalAnchor href={!Boolean(children) && to ? to : ""} colored={false}>
+      <ExternalAnchor href={!Boolean(children) && to ? to : ''} colored={false}>
         <MenuItem>
           {leftIcon && <span>{leftIcon}</span>}
           {label}
-          {rightIcon && <span style={{ marginLeft: "auto" }}>{rightIcon}</span>}
+          {rightIcon && <span style={{ marginLeft: 'auto' }}>{rightIcon}</span>}
         </MenuItem>
       </ExternalAnchor>
     );

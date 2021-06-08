@@ -1,6 +1,6 @@
-import { ReactNode, useState } from "react";
-import styled from "styled-components";
-import { motion } from "framer-motion";
+import { ReactNode, useState } from 'react';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 const NavItemBox = styled(motion.div)<{
   isOpen: boolean;
@@ -8,11 +8,11 @@ const NavItemBox = styled(motion.div)<{
   cursor: pointer;
   padding: 0.5rem;
   width: 100%;
-  background-color: var(--foreground);
+  background-color: var(--color-background);
   border-radius: 10px;
   transition: filter 100ms;
   filter: ${({ isOpen }) =>
-    isOpen ? "brightness(1) grayscale(0)" : "brightness(0.8) grayscale(100%)"};
+    isOpen ? 'brightness(1) grayscale(0)' : 'brightness(0.8) grayscale(100%)'};
   transition: filter 300ms;
   :hover {
     filter: brightness(1) grayscale(0);

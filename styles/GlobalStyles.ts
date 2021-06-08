@@ -1,13 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GloBalStyles = createGlobalStyle`
-  :root {
-    --background: #242526;
-    --foreground: #484a4d;
-    --speed: 250ms;
-    --text: #eee;
-  }
-
   body {
     width: 100%;
     margin: 0;
@@ -16,6 +9,7 @@ const GloBalStyles = createGlobalStyle`
     font-family: "Avenir", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     color: #eee;
+    background: var(--color-background);
   }
   *+*{
     box-sizing: border-box;

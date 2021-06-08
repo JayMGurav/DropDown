@@ -1,8 +1,8 @@
-import React, { Children, cloneElement, useState, ReactNode } from "react";
-import styled from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { Children, cloneElement, useState, ReactNode } from 'react';
+import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import { IconSm } from "./styledComponents/Icon";
+import { IconSm } from './styledComponents/Icon';
 
 const DropdownDiv = styled(motion.div)`
   position: absolute;
@@ -11,7 +11,7 @@ const DropdownDiv = styled(motion.div)`
   padding: 0.25rem;
   width: max-content;
   margin-top: 1.5rem;
-  background-color: var(--background);
+  background-color: var(--color-background);
   border-radius: 16px;
   overflow: hidden;
 `;
