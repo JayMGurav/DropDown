@@ -10,6 +10,7 @@ const GloBalStyles = createGlobalStyle`
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     color: #eee;
     background: var(--color-background);
+    color: var(--color-text);
   }
   *+*{
     box-sizing: border-box;

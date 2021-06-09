@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const Nav = styled(motion.nav)`
-  background-color: var(--color-foreground);
+  background-color: var(--color-gray1);
   padding: 1rem;
   border-radius: 16px;
 `;

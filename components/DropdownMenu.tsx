@@ -11,7 +11,7 @@ const DropdownDiv = styled(motion.div)`
   padding: 0.25rem;
   width: max-content;
   margin-top: 1.5rem;
-  background-color: var(--color-background);
+  background-color: var(--color-gray1);
   border-radius: 16px;
   overflow: hidden;
 `;
@@ -35,7 +35,7 @@ const BackButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--foreground);
+    background: var(--color-gray2);
     cursor: pointer;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
     transform: rotate(180deg);

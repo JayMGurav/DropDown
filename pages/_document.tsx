@@ -1,6 +1,5 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
 import React from 'react';
-import { minify } from 'terser';
 
 import {
   COLORS,
@@ -47,7 +46,6 @@ const minifiedCorrectedSetColorByTheme = () => {
     .replace('🏺', INITIAL_COLOR_MODE_CSS_PROPERTY);
 
   const called = `(${corrected})()`;
-  // const {code} = await minify(called);
 
   return called;
 };

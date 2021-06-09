@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import Image from "next/image";
+import styled from 'styled-components';
+import Image from 'next/image';
 
 const ProfileTabDiv = styled.div`
   display: flex;
@@ -19,7 +19,6 @@ const ProfileTabDiv = styled.div`
 `;
 const ProfileImage = styled(Image)`
   border-radius: 50%;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
 `;
 
 function ProfileTab() {

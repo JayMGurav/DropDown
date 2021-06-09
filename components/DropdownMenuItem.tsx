@@ -14,11 +14,12 @@ const MenuItem = styled.li`
   border-radius: 8px;
   span:first-of-type {
     border-radius: 50%;
-    background: var(--color-background);
+    /* background: var(--color-background); */
+    background: var(--color-gray2);
     filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
   }
   :hover {
-    background-color: var(--color-foreground);
+    background-color: var(--color-gray3);
   }
 `;
 

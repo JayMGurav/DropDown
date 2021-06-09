@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 const Icon = styled(motion.img)`
   padding: 0.25rem;
@@ -21,7 +21,7 @@ export const IconMd = styled(Icon)`
 `;
 
 export const SkillsIcon = styled(IconMd)`
-  background: var(--foreground);
+  background: var(--color-gray2);
   filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
 `;
 

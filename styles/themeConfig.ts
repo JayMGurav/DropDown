@@ -1,11 +1,23 @@
 export const COLORS = {
   background: {
-    light: 'hsla(0, 100%, 100%, 1)',
-    dark: 'hsla(0, 0%, 6%, 1)',
+    light: 'hsl(207, 100%, 99%)',
+    dark: 'hsl(0, 0%, 2%)',
   },
-  foreground: {
-    light: 'hsla(195, 15%, 95%, 1)',
-    dark: 'hsla(0, 0%, 10%, 1)',
+  text: {
+    light: 'hsl(0, 0%, 2%)',
+    dark: 'hsl(207, 100%, 99%)',
+  },
+  gray1: {
+    light: 'hsl(204, 15%, 94%)',
+    dark: 'hsl(0,0%, 6%)',
+  },
+  gray2: {
+    light: 'hsl(0, 0%, 88%)',
+    dark: 'hsl(0,0%, 12%)',
+  },
+  gray3: {
+    light: 'hsl(0, 0%, 82%)',
+    dark: 'hsl(0,0%, 18%)',
   },
 };
 
