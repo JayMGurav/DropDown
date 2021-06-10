@@ -1,6 +1,6 @@
 import React, { Children, cloneElement, useState, ReactNode } from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 
 import { IconSm } from './styledComponents/Icon';
 
@@ -37,7 +37,6 @@ const BackButton = styled.button`
     justify-content: center;
     background: var(--color-gray2);
     cursor: pointer;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
     transform: rotate(180deg);
   }
 `;
@@ -68,44 +67,52 @@ function DropdownMenu({ children }) {
   };
 
   return (
-    <DropdownDiv
-      layout
-      transition={{
-        duration: 0.1,
-      }}>
-      <AnimatePresence exitBeforeEnter>
-        {!isMenuActive && (
-          <DropdownList
-            initial={{
-              opacity: 0,
-              x: -100,
-            }}
-            animate={animate}
-            key="dropdownList">
-            {Children.map(children, (child) =>
-              cloneElement(child, {
-                activateMenu,
-                deactivateMenu,
-              })
-            )}
-          </DropdownList>
-        )}
-        {isMenuActive && (
-          <ActiveMenuDiv
-            key="activeMenu"
-            initial={{
-              opacity: 0,
-              x: 100,
-            }}
-            animate={animate}>
-            <BackButton onClick={deactivateMenu}>
-              <IconSm src="/arrow.svg" />
-            </BackButton>
-            {activeMenu}
-          </ActiveMenuDiv>
-        )}
-      </AnimatePresence>
-    </DropdownDiv>
+    <AnimateSharedLayout>
+      <DropdownDiv
+        layout
+        transition={{
+          duration: 0.1,
+        }}>
+        <AnimatePresence exitBeforeEnter>
+          {!isMenuActive && (
+            <DropdownList
+              initial={{
+                opacity: 0,
+                x: -100,
+              }}
+              animate={animate}
+              transition={{
+                delay: 0.05,
+              }}
+              key="dropdownList">
+              {Children.map(children, (child) =>
+                cloneElement(child, {
+                  activateMenu,
+                  deactivateMenu,
+                })
+              )}
+            </DropdownList>
+          )}
+          {isMenuActive && (
+            <ActiveMenuDiv
+              initial={{
+                opacity: 0,
+                x: 100,
+              }}
+              animate={animate}
+              transition={{
+                delay: 0.05,
+              }}
+              key="activeMenu">
+              <BackButton onClick={deactivateMenu}>
+                <IconSm src="/arrow.svg" />
+              </BackButton>
+              {activeMenu}
+            </ActiveMenuDiv>
+          )}
+        </AnimatePresence>
+      </DropdownDiv>
+    </AnimateSharedLayout>
   );
 }
 export default DropdownMenu;

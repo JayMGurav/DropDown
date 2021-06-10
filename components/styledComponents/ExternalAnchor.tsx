@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledExternalAnchor = styled.a<{ colored: boolean }>`
   text-decoration: none;
-  color: ${({ colored }) => (colored ? "#99e2ff" : "inherit")};
+  color: ${({ colored }) => (colored ? '#b78aff' : 'inherit')};
 `;
 
 function ExternalAnchor({ children, colored, href }) {

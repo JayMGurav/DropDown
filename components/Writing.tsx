@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import NavItem from "./NavItem";
-import DropdownMenu from "./DropdownMenu";
-import { IconSm } from "./styledComponents/Icon";
+import NavItem from './NavItem';
+import DropdownMenu from './DropdownMenu';
+import { IconSm } from './styledComponents/Icon';
 
 const WritingBox = styled.div`
   width: 250px;
@@ -22,9 +22,9 @@ const WritingItem = styled.li`
   align-items: center;
   gap: 1ch;
   border-radius: 8px;
-  span {
+  ${IconSm} {
     border-radius: 50%;
-    background: var(--background);
+    background: var(--color-background);
     filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
   }
   img {
@@ -40,7 +40,7 @@ function Writing() {
           <strong>
             <span role="image" aria-label="coming soon">
               🎉
-            </span>{" "}
+            </span>{' '}
             Coming Soon!!
           </strong>
           <WritingItem>

@@ -9,7 +9,10 @@ const NavItemBox = styled(motion.div)<{ isOpen: boolean }>`
   background-color: var(--color-gray2);
   color: var(--color-text);
   border-radius: 10px;
+  filter: ${({ isOpen }) =>
+    !isOpen ? 'brightness(0.8) grayscale(100%)' : 'brightness(1) grayscale(0)'};
   :hover {
+    filter: brightness(1) grayscale(0);
     background-color: var(--color-gray3);
   }
 `;
@@ -43,8 +46,9 @@ function NavItem({
       <NavItemBox
         onClick={toOpen}
         isOpen={isOpen}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.98 }}>
+        // whileHover={{ scale: 1.08 }}
+        // whileTap={{ scale: 0.98 }}
+      >
         {label}
       </NavItemBox>
       {isOpen && children}
