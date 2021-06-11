@@ -1,13 +1,11 @@
-
 # My Drop dowwn
 
-A fun drop down list with my details and nice little interactions
+A fun drop down list with my details and perfect dark/light mode with nice little interactions
 
 ## Demo
 
 ![DropDown](demo.gif)
 
-  
 ## Run Locally
 
 Clone the project
@@ -34,8 +32,6 @@ Start the server
   npm run start
 ```
 
-  
 ## Feedback
-Feedback is appreciated! Reach out on [Twitter](https://twitter.com/JayMGurav) or submit a new issue!
 
-  
+Feedback is appreciated! Reach out on [Twitter](https://twitter.com/JayMGurav) or submit a new issue!
