@@ -17,7 +17,7 @@ const NavItemBox = styled(motion.div)<{ isOpen: boolean }>`
   }
 `;
 
-const Li = styled.li<{ isOpen: () => boolean }>`
+const Li = styled.li<{ isOpen: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;

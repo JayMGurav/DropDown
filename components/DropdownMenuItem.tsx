@@ -11,9 +11,7 @@ interface DropdownMenuItemProps {
   rightIcon?: ReactNode;
   label: string;
   to?: string;
-  activateMenu?: (toActivateMenu: boolean) => void;
-  deactivateMenu?: () => void;
-  render?: boolean;
+  activateMenu?: (children: ReactNode) => void;
 }
 
 function DropdownMenuItem({
