@@ -41,6 +41,28 @@ const spring = {
   damping: 20,
 };
 
+const ModeBtn = ({
+  darkColorMode,
+  changeColorMode,
+}: {
+  darkColorMode: boolean;
+  changeColorMode: (arg: string) => void;
+}) => (
+  <>
+    <ModeButtonDiv isDarkModeOn={darkColorMode ? true : false}>
+      <ModeButton
+        layout
+        onClick={() => {
+          const changeColorModeTo = darkColorMode ? 'light' : 'dark';
+          changeColorMode(changeColorModeTo);
+        }}
+        transition={spring}>
+        {darkColorMode ? '🌞' : '🌜'}
+      </ModeButton>
+    </ModeButtonDiv>
+  </>
+);
+
 function HeaderSection() {
   const { colorMode, changeColorMode } = useContext(ThemeContext);
 
@@ -62,16 +84,10 @@ function HeaderSection() {
           DARK
         </H1>
       )}
-      <ModeButtonDiv isDarkModeOn={colorMode === 'dark' ? true : false}>
-        <ModeButton
-          layout
-          onClick={() =>
-            changeColorMode(colorMode === 'dark' ? 'light' : 'dark')
-          }
-          transition={spring}>
-          {colorMode === 'dark' ? '🌞' : '🌜'}
-        </ModeButton>
-      </ModeButtonDiv>
+      <ModeBtn
+        darkColorMode={colorMode === 'dark'}
+        changeColorMode={changeColorMode}
+      />
     </>
   );
 }

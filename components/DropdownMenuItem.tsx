@@ -1,6 +1,4 @@
-import { ReactNode, useState } from 'react';
-import styled from 'styled-components';
-import DropdownItemChildPortal from './DropdownItemChildrenPortal';
+import { ReactNode } from 'react';
 
 import ExternalAnchor from './styledComponents/ExternalAnchor';
 import MenuItem from './styledComponents/MenuItem';
@@ -32,7 +30,9 @@ function DropdownMenuItem({
     );
   } else {
     return (
-      <ExternalAnchor href={!Boolean(children) && to ? to : ''} colored={false}>
+      <ExternalAnchor
+        href={!Boolean(children) && to ? to : 'javascript:void(0);'}
+        colored={false}>
         <MenuItem>
           {leftIcon && <span>{leftIcon}</span>}
           {label}
